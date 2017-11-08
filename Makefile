@@ -1,3 +1,3 @@
-PROGRAM=futronix-alexa-iot
+PROGRAM=futronix-iot
 EXTRA_COMPONENTS = extras/paho_mqtt_c extras/mbedtls extras/jsmn
 include ../../common.mk

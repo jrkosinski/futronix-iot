@@ -291,16 +291,16 @@ static void wifi_task(void *pvParameters) {
 // Entry point 
 // 
 void user_init(void) {
-    uart_set_baud(0, 115200);
-    printf("SDK version: %s, free heap %u\n", sdk_system_get_sdk_version(),
+    	uart_set_baud(0, 115200);
+    	printf("SDK version: %s, free heap %u\n", sdk_system_get_sdk_version(),
             xPortGetFreeHeapSize());
 
-    gpio_enable(LED_PIN, GPIO_OUTPUT);
-    gpio_write(LED_PIN, 1);
+    	gpio_enable(LED_PIN, GPIO_OUTPUT);
+    	gpio_write(LED_PIN, 1);
 
-    publish_queue = xQueueCreate(3, 16);
-    xTaskCreate(&wifi_task, "wifi_task", 256, NULL, 2, NULL);
-    xTaskCreate(&beat_task, "beat_task", 256, NULL, 2, NULL);
-    xTaskCreate(&mqtt_task, "mqtt_task", 2048, NULL, 2, NULL);
+    	publish_queue = xQueueCreate(3, 16);
+    	xTaskCreate(&wifi_task, "wifi_task", 256, NULL, 2, NULL);
+    	xTaskCreate(&mqtt_task, "mqtt_task", 2048, NULL, 2, NULL);
 }
+
 
