@@ -1,4 +1,3 @@
-<<<<<<<
 
 TODO: 
 -----
@@ -21,9 +20,17 @@ DEVELOPMENT:
 	- AWS MQTT listener 
 		- json parser 
 	- IR command interface 
+		- commands 
+		- irsend library 
 	- on-chip storage interface 
 		- (fixed-field or spiffs)
+		- wifi creds 
+		- scene names 
+	- scene names support 
+		- get from/store to chip storage 
+		- automatic translation to codes 
 	- admin app listener 
+	
 	
 - Admin app (Android/IOS, or Android only?) 
 	- detect device 
@@ -104,5 +111,3 @@ Please follow the steps below to build and run the example on your ESP8266.
  to topic 'esp8266/status'. You could also publish 'on' or 'off' message
  to topic 'esp8266/control' to toggle the GPIO/LED (GPIO2 is used by the
  example).
-
->>>>>>>
