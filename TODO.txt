@@ -1,15 +1,51 @@
 
 TODO: 
-- get rid of publishing (that random blinking?)
-- config debugger 
-- incorporate IR lib
-- parse JSON
-- convert code to be real project 
-- upload to source ctl
+-----
+
+R&D: 
+- on-chip storage for RTOS 
+- multiple devices & user identification
+- PWM for IR 
 
 
-TO TURN INTO APP: 
-- admin app to write wifi creds to chip 
-- EEPROM or SPIFFS to store wifi creds 
-- IR codesend 
 
+DEVELOPMENT: 
+- AWS components 
+	- device shadow 
+	- certificates 
+	- Alexa smartHome skill 
+	
+- User identification 
+	- ? 
+
+- On-chip components (RTOS)
+	- AWS MQTT listener 
+		- json parser 
+	- IR command interface 
+		- commands 
+		- irsend library 
+	- on-chip storage interface 
+		- (fixed-field or spiffs)
+		- wifi creds 
+		- scene names 
+	- scene names support 
+		- get from/store to chip storage 
+		- automatic translation to codes 
+	- admin app listener 
+	
+	
+- Admin app (Android/IOS, or Android only?) 
+	- detect device 
+	- write wifi credentials 
+	- set scene names 
+	- UI design (?) 
+
+- Security 
+	- test & verify security & hackability
+
+- Preparation for release 
+	- AWS publishing info 
+	- Licensing 
+	
+- Release 
+	
