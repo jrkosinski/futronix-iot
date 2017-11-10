@@ -221,6 +221,7 @@ void Fauxmo::handleTCPPacket(unsigned int deviceId, AsyncClient *client, void *d
 {
   ((char * )data)[len] = 0;
   String content = String((char *) data);
+  Serial.println((char *) data);
 
   fauxmoesp_device_t device = _devices[deviceId];
 
@@ -255,6 +256,7 @@ void Fauxmo::handleTCPPacket(unsigned int deviceId, AsyncClient *client, void *d
 
 AcConnectHandler Fauxmo::getTCPClientHandler(unsigned int deviceId) 
 {
+  Serial.println(deviceId);
   return [this, deviceId](void *s, AsyncClient * client) 
   {
     if (!_enabled) return;

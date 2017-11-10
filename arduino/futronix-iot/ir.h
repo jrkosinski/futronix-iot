@@ -1,10 +1,11 @@
 #ifndef __IR_TRANSMITTER_H__
 #define __IR_TRANSMITTER_H__
 
-#define IR_PIN              0
 #define FUTRONIX_INTERVAL   1560
 #define FUTRONIX_BITMARK    700
 #define FUTRONIX_CMD_GAP    102
+
+#include "debug.h"
 
 /****************************************
  * IRTransmitter
@@ -82,8 +83,8 @@ void IRTransmitter::begin()
 {
   this->_enabled = true; 
   DEBUG_PRINTLN("Setting ir pin to OUTPUT - pin ");
-  DEBUG_PRINTLN(IR_PIN); 
-  pinMode(IR_PIN, OUTPUT);
+  DEBUG_PRINTLN(this->_pin); 
+  pinMode(this->_pin, OUTPUT);
   this->pinOff(); 
 }
 
@@ -211,13 +212,13 @@ void IRTransmitter::mark(unsigned int usec)
 /*---------------------------------------*/
 void IRTransmitter::pinOn() 
 {
-  digitalWrite(IR_PIN, LOW);
+  digitalWrite(this->_pin, LOW);
 }
 
 /*---------------------------------------*/
 void IRTransmitter::pinOff() 
 {
-  digitalWrite(IR_PIN, HIGH);
+  digitalWrite(this->_pin, HIGH);
 }
 
 /*---------------------------------------*/

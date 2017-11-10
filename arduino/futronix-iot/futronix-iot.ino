@@ -27,6 +27,7 @@ void setup()
 
   //initialize the IR 
   futronix = new Futronix(IR_PIN); 
+  futronix->begin();
 
   //initialize wifi connection 
   wifi = new WifiConnection(myWifiSsid, myWifiPassword); 
@@ -39,10 +40,10 @@ void setup()
   if (wifi->connect())
   {
     wemulator->begin();
-    
-    wemulator->addDevice("scene one", 80, new WemoCallbackHandler(&sceneNum, 1)); 
-    wemulator->addDevice("scene two", 81, new WemoCallbackHandler(&sceneNum, 2)); 
-    wemulator->addDevice("scene three", 82, new WemoCallbackHandler(&sceneNum, 3)); 
+
+    for (int n=1; n<=3; n++){
+      wemulator->addDevice(sceneNamesMap[n], 80+n, new WemoCallbackHandler(&sceneNum, n)); 
+    }
   }
 }
 
