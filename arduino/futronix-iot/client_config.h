@@ -15,7 +15,7 @@ const char* myWifiPassword  = "HappyTime";
 //scene names to scenes mapping 
 const char* sceneNamesMap[] = { 
   "off",              //OFF
-  "night scene",      //1 
+  "scene one",        //1 
   "scene two",        //2 
   "scene three",      //3 
   "scene four",       //4 
