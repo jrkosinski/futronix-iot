@@ -8,6 +8,11 @@
 
 #define COMMANDS_LEN 20
 
+/****************************************
+ * Futronix  
+ * ---------
+ * Futronix command interface. 
+ */
 class Futronix
 {
   private: 
@@ -26,23 +31,42 @@ class Futronix
   private: 
     unsigned short getSceneCommand(unsigned int scene);
 };
+/****************************************/
 
 
+// ************************************************************************************
+// public constructor 
+//
+// args
+//  ir_pin: pin number for IR pin
+//
 Futronix::Futronix(int ir_pin)
 {
   this->_ir = new IRTransmitter(ir_pin);
 }
 
+// ************************************************************************************
+// public destructor
+// 
 Futronix::~Futronix()
 {
   delete _ir;
 }
 
+// ************************************************************************************
+// initializes the instance and gets it ready for use. 
+// 
 void Futronix::begin()
 {
   this->_ir->begin(); 
 }
 
+// ************************************************************************************
+// sets the specified scene (specified by scene number, 1-based index)
+// 
+// args
+//  scene: the scene number to set (1-based index)
+//
 void Futronix::setScene(unsigned int scene)
 {
   unsigned short cmd = this->getSceneCommand(scene); 
@@ -53,6 +77,14 @@ void Futronix::setScene(unsigned int scene)
   }
 }
 
+// ************************************************************************************
+// gets the command code to set the given scene
+// 
+// args
+//  scene: the scene number to translate (1-based index)
+//
+// returns: an IR command code 
+// 
 unsigned short Futronix::getSceneCommand(unsigned int scene)
 {
   if (scene > 0 && scene <= COMMANDS_LEN)
