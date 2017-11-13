@@ -19,6 +19,7 @@
 uint16_t onTimePeriod = 0;
 uint16_t offTimePeriod = 0;
 int8_t periodOffset = 0;
+uint16_t halfPeriodicTime = 0;
 
 
 void mark(uint32_t time);
@@ -47,9 +48,9 @@ uint32_t calcUSecPeriod(uint32_t hz, bool use_offset) {
   	uint32_t period = (1000000UL + hz/2) / hz;  // The equiv of round(1000000/hz).
   	// Apply the offset and ensure we don't result in a <= 0 value.
   	if (use_offset)
-    		return MAX_ARG((uint32_t) 1, period + periodOffset);
+    	return MAX_ARG((uint32_t) 1, period + periodOffset);
   	else
-    		return MAX_ARG((uint32_t) 1, period);
+    	return MAX_ARG((uint32_t) 1, period);
 }
 
 // ******************************************************************************
@@ -64,6 +65,7 @@ uint32_t calcUSecPeriod(uint32_t hz, bool use_offset) {
 //   microseconds timing. Thus minor changes to the freq & duty values may have
 //   limited effect. You've been warned.
 void enableIROut(uint32_t freq, uint8_t duty) {
+/*
   	// Can't have more than 100% duty cycle.
   	duty = MIN_ARG(duty, (uint8_t) 100);
   	if (freq < 1000)  // Were we given kHz? Supports the old call usage.
@@ -74,6 +76,9 @@ void enableIROut(uint32_t freq, uint8_t duty) {
   	onTimePeriod = (period * duty) / 100;
   	// Nr. of uSeconds the LED will be off per pulse.
   	offTimePeriod = period - onTimePeriod;
+*/
+
+    halfPeriodicTime = 500/freq;
 }
 
 // ******************************************************************************
@@ -139,35 +144,35 @@ void sendData(uint16_t onemark, uint32_t onespace,
                       uint16_t zeromark, uint32_t zerospace,
                       uint64_t data, uint16_t nbits, bool MSBfirst) {
   	if (nbits == 0)  // If we are asked to send nothing, just return.
-    		return;
+    	return;
 
   	if (MSBfirst) {  // Send the MSB first.
-    		// Send 0's until we get down to a bit size we can actually manage.
-    		while (nbits > sizeof(data) * 8) {
+    	// Send 0's until we get down to a bit size we can actually manage.
+    	while (nbits > sizeof(data) * 8) {
       			mark(zeromark);
       			space(zerospace);
       			nbits--;
-    		}		
+    	}		
     
 		// Send the supplied data.
-    		for (uint64_t mask = 1ULL << (nbits - 1);  mask;  mask >>= 1) {
-      			if (data & mask) {  // Send a 1
-        			mark(onemark);
-        			space(onespace);
-      			} 
+    	for (uint64_t mask = 1ULL << (nbits - 1);  mask;  mask >>= 1) {
+      		if (data & mask) {  // Send a 1
+        		mark(onemark);
+        		space(onespace);
+      		} 
 			else {  // Send a 0
-        			mark(zeromark);
-        			space(zerospace);
-      			}
+        		mark(zeromark);
+        		space(zerospace);
+      		}
 		}
   	} 
 	else {  // Send the Least Significant Bit (LSB) first / MSB last.
 		for (uint16_t bit = 0; bit < nbits; bit++, data >>= 1)
 		{
-	      		if (data & 1) {  // Send a 1
+	      	if (data & 1) {  // Send a 1
 				mark(onemark);
 				space(onespace);
-	      		} 
+	      	} 
 			else {  // Send a 0
 				mark(zeromark);
 				space(zerospace);

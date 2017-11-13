@@ -11,7 +11,7 @@
 #define FUTRONIX_BITMARK    700
 #define FUTRONIX_CMD_GAP    102
 
-void sendLG(uint64_t data, uint16_t nbits, uint16_t repeat);
+void futronix_irsend(uint16_t data);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,7 +20,7 @@ void sendLG(uint64_t data, uint16_t nbits, uint16_t repeat);
 // ******************************************************************************
 // Send a Futronix protocol formatted message.
 //
-void sendFutronix(uint16_t data)
+void futronix_irsend(uint16_t data)
 {
 	enableIROut(38, DEFAULT_DUTY); 
     
@@ -31,75 +31,76 @@ void sendFutronix(uint16_t data)
 	uint8_t index = 0; 
 	
 	for (uint16_t mask = 1UL << (nbits - 1); mask; mask >>= 1) 
-    	{
-      		if (data & mask) 
-      		{  
-        		commandBits[index++] = true; 
-        		onesCount++; 
-      		} 
-      		else
-      		{
-		        commandBits[index++] = false; 
+    {
+      	if (data & mask) 
+      	{  
+        	commandBits[index++] = true; 
+        	onesCount++; 
+      	} 
+      	else
+      	{
+		    commandBits[index++] = false; 
 		}
 	}
     
-    	for(uint8_t i=0; i<3; i++)
-    	{
-      		//header
-      		mark(FUTRONIX_BITMARK); 
-	      	space((FUTRONIX_INTERVAL * 4) - FUTRONIX_BITMARK); 
-	      	mark(FUTRONIX_BITMARK); 
-      		space((FUTRONIX_INTERVAL) - FUTRONIX_BITMARK); 
+    for(uint8_t i=0; i<3; i++)
+    {
+      	//header
+      	mark(FUTRONIX_BITMARK); 
+	    space((FUTRONIX_INTERVAL * 4) - FUTRONIX_BITMARK); 
+	    mark(FUTRONIX_BITMARK); 
+      	space((FUTRONIX_INTERVAL) - FUTRONIX_BITMARK); 
 
-      		//address (4 0s) 
-      		for(uint8_t n=0; n<4; n++)
-      		{
-        		mark(FUTRONIX_BITMARK);
-        		space((FUTRONIX_INTERVAL) - FUTRONIX_BITMARK); 
-      		}
+      	//address (4 0s) 
+      	for(uint8_t n=0; n<4; n++)
+      	{
+        	mark(FUTRONIX_BITMARK);
+        	space((FUTRONIX_INTERVAL) - FUTRONIX_BITMARK); 
+      	}
       
-      		//command 6 bits
-      		uint8_t bitPosition = 5; 
-      		for(uint8_t n = 5; n>=0; n--)
+      	//command 6 bits
+      	uint8_t bitPosition = 5; 
+      	for(int n = 5; n>=0; n--)
 		{
-        		if (commandBits[n])
-        		{
-          			mark(FUTRONIX_BITMARK);
-          			if (bitPosition % 2 == 0)
-            				space((FUTRONIX_INTERVAL * 3) - FUTRONIX_BITMARK); 
-          			else 
-            				space((FUTRONIX_INTERVAL * 2) - FUTRONIX_BITMARK); 
-        		}
-			else
-        		{
-          			mark(FUTRONIX_BITMARK);
-          			space((FUTRONIX_INTERVAL) - FUTRONIX_BITMARK); 
-        		}
+        	if (commandBits[n])
+        	{
+          		mark(FUTRONIX_BITMARK);
+          		if (bitPosition % 2 == 0)
+            		space((FUTRONIX_INTERVAL * 3) - FUTRONIX_BITMARK); 
+          		else 
+            		space((FUTRONIX_INTERVAL * 2) - FUTRONIX_BITMARK); 
+        	}
+		    else
+        	{
+          		mark(FUTRONIX_BITMARK);
+          		space((FUTRONIX_INTERVAL) - FUTRONIX_BITMARK); 
+        	}
         
-        		bitPosition++; 
-	      	}
+        	bitPosition++; 
+	    }
       
-      		//parity bit
-      		if (onesCount %2 == 0) 
-      		{
-        		mark(FUTRONIX_BITMARK);
-        		space((FUTRONIX_INTERVAL * 2) - FUTRONIX_BITMARK); 
-      		}
-      		else
-      		{
-        		mark(FUTRONIX_BITMARK);
-        		space((FUTRONIX_INTERVAL) - FUTRONIX_BITMARK); 
-      		}
+      	//parity bit
+        if (onesCount %2 == 0) 
+      	{
+        	mark(FUTRONIX_BITMARK);
+        	space((FUTRONIX_INTERVAL * 2) - FUTRONIX_BITMARK); 
+      	}
+      	else
+      	{
+        	mark(FUTRONIX_BITMARK);
+        	space((FUTRONIX_INTERVAL) - FUTRONIX_BITMARK); 
+      	}
       
-	      	//footer
-	      	//DEBUG_PRINTLN("\nfooter:"); 
-	      	mark(FUTRONIX_BITMARK); 
-	      	space((FUTRONIX_INTERVAL * 4) - FUTRONIX_BITMARK); 
-	      	mark(FUTRONIX_BITMARK); 
+	    //footer
+	    //DEBUG_PRINTLN("\nfooter:"); 
+	    mark(FUTRONIX_BITMARK); 
+	    space((FUTRONIX_INTERVAL * 4) - FUTRONIX_BITMARK); 
+	    mark(FUTRONIX_BITMARK); 
 	  
 		irOff();
-	      	sdk_os_delay_us(FUTRONIX_CMD_GAP);  
+	    sdk_os_delay_us(FUTRONIX_CMD_GAP);  
 	}
+    irOff();
 }
 
 #endif

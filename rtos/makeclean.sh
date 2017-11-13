@@ -1,4 +1,4 @@
-rm *~
+cleandir.sh
 make clean
 make
 sudo make flash ESPPORT=/dev/ttyUSB0

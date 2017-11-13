@@ -1,5 +1,5 @@
 build/program//ssl_connection.o: \
- /home/john/esp-open-rtos/examples/futronix-alexa-rtos/ssl_connection.c \
+ /home/john/esp-open-rtos/examples/futronix-iot/ssl_connection.c \
  ../../include/espressif/esp_common.h \
  ../../libc/xtensa-lx106-elf/include/stdint.h \
  ../../libc/xtensa-lx106-elf/include/machine/_default_types.h \
@@ -116,8 +116,8 @@ build/program//ssl_connection.o: \
  ../../libc/xtensa-lx106-elf/include/string.h \
  ../../libc/xtensa-lx106-elf/include/strings.h \
  ../../libc/xtensa-lx106-elf/include/sys/string.h \
- /home/john/esp-open-rtos/examples/futronix-alexa-rtos/ssl_connection.h \
- /home/john/esp-open-rtos/examples/futronix-alexa-rtos/mbedtls/config.h \
+ /home/john/esp-open-rtos/examples/futronix-iot/ssl_connection.h \
+ /home/john/esp-open-rtos/examples/futronix-iot/mbedtls/config.h \
  ../../extras/mbedtls/mbedtls/include/mbedtls/check_config.h \
  ../../extras/mbedtls/mbedtls/include/mbedtls/net_sockets.h \
  ../../extras/mbedtls/mbedtls/include/mbedtls/config.h \
