@@ -2,7 +2,7 @@
 const char *client_endpoint = "a21jd7gud1swyd.iot.us-east-1.amazonaws.com";
 
 // AWS IoT device certificate (ECC)
-const char *client_cert =
+char *client_cert =
 "-----BEGIN CERTIFICATE-----\r\n"
 "MIIDFTCCAf2gAwIBAgIUYuiKI3pB1OHyMvUjNv/SnskSR08wDQYJKoZIhvcNAQEL\r\n"
 "BQAwTTFLMEkGA1UECwxCQW1hem9uIFdlYiBTZXJ2aWNlcyBPPUFtYXpvbi5jb20g\r\n"
@@ -24,7 +24,7 @@ const char *client_cert =
 "-----END CERTIFICATE-----\r\n"; 
 
 // AWS IoT device private key (ECC)
-const char *client_key = 
+char *client_key = 
 "-----BEGIN EC PARAMETERS-----\r\n"
 "BggqhkjOPQMBBw==\r\n"
 "-----END EC PARAMETERS-----\r\n"
@@ -36,7 +36,7 @@ const char *client_key =
 
 
 // trusted root CA certificate - https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem
-const char *ca_cert = "-----BEGIN CERTIFICATE-----\r\n"
+char *ca_cert = "-----BEGIN CERTIFICATE-----\r\n"
         "MIIE0zCCA7ugAwIBAgIQGNrRniZ96LtKIVjNzGs7SjANBgkqhkiG9w0BAQUFADCB\r\n"
         "yjELMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMR8wHQYDVQQL\r\n"
         "ExZWZXJpU2lnbiBUcnVzdCBOZXR3b3JrMTowOAYDVQQLEzEoYykgMjAwNiBWZXJp\r\n"

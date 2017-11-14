@@ -1,2 +1,3 @@
 rm *~
-rm irsend/*~
+rm inc/*~
+rm inc/irsend/*~

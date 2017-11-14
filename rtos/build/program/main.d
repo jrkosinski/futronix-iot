@@ -100,19 +100,7 @@ build/program//main.o: \
  ../../libc/xtensa-lx106-elf/include/reent.h \
  ../../FreeRTOS/Source/include/task.h \
  ../../FreeRTOS/Source/include/list.h \
- ../../FreeRTOS/Source/include/queue.h ../../include/ssid_config.h \
- ../../include/private_ssid_config.h ../../include/espressif/esp_sta.h \
- ../../include/espressif/esp_wifi.h \
- ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTESP8266.h \
- ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTClient.h \
- ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTPacket.h \
- ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTConnect.h \
- ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTPublish.h \
- ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTSubscribe.h \
- ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTUnsubscribe.h \
- ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTFormat.h \
- ../../extras/paho_mqtt_c/../paho_mqtt_c/StackTrace.h \
- ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTESP8266.h \
+ ../../FreeRTOS/Source/include/queue.h \
  /home/john/esp-open-rtos/examples/futronix-iot/client_config.h \
  /home/john/esp-open-rtos/examples/futronix-iot/ssl_connection.h \
  /home/john/esp-open-rtos/examples/futronix-iot/mbedtls/config.h \
@@ -141,15 +129,30 @@ build/program//main.o: \
  ../../extras/mbedtls/mbedtls/include/mbedtls/aes.h \
  ../../extras/mbedtls/mbedtls/include/mbedtls/error.h \
  ../../extras/mbedtls/mbedtls/include/mbedtls/certs.h \
- /home/john/esp-open-rtos/examples/futronix-iot/irsend/futronix.h \
- /home/john/esp-open-rtos/examples/futronix-iot/irsend/send.h \
- /home/john/esp-open-rtos/examples/futronix-iot/storage.h \
+ /home/john/esp-open-rtos/examples/futronix-iot/inc/irsend/futronix.h \
+ /home/john/esp-open-rtos/examples/futronix-iot/inc/irsend/send.h \
+ /home/john/esp-open-rtos/examples/futronix-iot/inc/storage.h \
  ../../libc/xtensa-lx106-elf/include/unistd.h \
  ../../libc/xtensa-lx106-elf/include/sys/unistd.h \
  ../../extras/spiffs/spiffs/src/spiffs.h \
  ../../extras/spiffs/spiffs_config.h \
  ../../libc/xtensa-lx106-elf/include/ctype.h \
  ../../extras/spiffs/esp_spiffs.h \
- /home/john/esp-open-rtos/examples/futronix-iot/blink.h \
- /home/john/esp-open-rtos/examples/futronix-iot/parser.h \
- ../../extras/jsmn/jsmn/jsmn.h
+ /home/john/esp-open-rtos/examples/futronix-iot/inc/blink.h \
+ /home/john/esp-open-rtos/examples/futronix-iot/inc/parser.h \
+ ../../extras/jsmn/jsmn/jsmn.h \
+ /home/john/esp-open-rtos/examples/futronix-iot/inc/blink.h \
+ /home/john/esp-open-rtos/examples/futronix-iot/inc/wifi.h \
+ ../../include/ssid_config.h ../../include/private_ssid_config.h \
+ ../../include/espressif/esp_sta.h ../../include/espressif/esp_wifi.h \
+ /home/john/esp-open-rtos/examples/futronix-iot/inc/mqtt.h \
+ ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTESP8266.h \
+ ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTClient.h \
+ ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTPacket.h \
+ ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTConnect.h \
+ ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTPublish.h \
+ ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTSubscribe.h \
+ ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTUnsubscribe.h \
+ ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTFormat.h \
+ ../../extras/paho_mqtt_c/../paho_mqtt_c/StackTrace.h \
+ ../../extras/paho_mqtt_c/../paho_mqtt_c/MQTTESP8266.h
