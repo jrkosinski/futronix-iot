@@ -1,12 +1,18 @@
-
+/*
+ * HTTP server example.
+ *
+ * This sample code is in the public domain.
+ */
 #include <espressif/esp_common.h>
+#include <esp8266.h>
 #include <esp/uart.h>
 #include <string.h>
+#include <stdio.h>
 #include <FreeRTOS.h>
 #include <task.h>
 #include <queue.h>
-#include <stdio.h>
-#include <esp8266.h>
+#include <ssid_config.h>
+#include <httpd/httpd.h>
 
 // this must be ahead of any mbedtls header files so the local mbedtls/config.h can be properly referenced
 #include "client_config.h" 
@@ -18,15 +24,15 @@
 #include "inc/blink.h"
 #include "inc/wifi.h"
 #include "inc/mqtt.h"
-//#include "inc/httpserver.h"
+#include "inc/upnp.h"
+#include "inc/blink.h"
+#include "inc/httpsrv.h"
 
 #define USE_IR_PIN 	false
 #define USE_LED_PIN	true
 
 /* certs, key, and endpoint */
 //extern char *ca_cert, *client_endpoint, *client_cert, *client_key;
-
-
 
 // *******************************************************************************************
 // 
@@ -57,6 +63,29 @@ static void mqtt_task(void *pvParameters) {
 // 
 static void wifi_task(void *pvParameters) {
     wifi_spin();
+}
+
+// *******************************************************************************************
+// 
+bool upnp_initialized = false;
+static void upnp_task(void *pvParameters)
+{
+    if (wifi_alive)
+    {
+        blink(2, 1000); 
+
+        if (!upnp_initialized)
+            upnp_initialized = upnp_init();       
+        else
+            blink(3, 1000); 
+    }
+}
+
+// *******************************************************************************************
+// 
+void httpd_task(void *pvParameters)
+{
+    httpsrv_start();
 }
 
 // *******************************************************************************************
@@ -106,10 +135,8 @@ void unittest_spiffs_task(void* pvParameters)
     vTaskDelay(10000 / portTICK_PERIOD_MS);
 }
 
-// *******************************************************************************************
-// Entry point 
-// 
-void user_init(void) {
+void user_init(void)
+{
     uart_set_baud(0, 9600);
     printf("SDK version: %s, free heap %u\n", sdk_system_get_sdk_version(), xPortGetFreeHeapSize());
 
@@ -125,10 +152,13 @@ void user_init(void) {
 
     storage_init();
     mqtt_init();
+    httpsrv_init();
 
     //xTaskCreate(&wifi_task, "wifi_task", 256, NULL, 2, NULL);
     //xTaskCreate(&mqtt_task, "mqtt_task", 2048, NULL, 2, NULL);
-    unittest_spiffs_task(0);
+    //xTaskCreate(&upnp_task, "mqtt_task", 2048, NULL, 2, NULL);
+    xTaskCreate(&httpd_task, "HTTP Daemon", 128, NULL, 2, NULL);
+    //unittest_spiffs_task(0);
 }
 
 
