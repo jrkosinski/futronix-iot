@@ -14,6 +14,18 @@ static int wifi_alive = 0;
 
 void wifi_spin();
 void wifi_try_connect();
+const char* wifi_get_ip();
+
+
+const char* wifi_get_ip()
+{
+    static char ip[16] = "0.0.0.0";
+    ip[0] = 0;
+    struct ip_info ipinfo;
+    (void) sdk_wifi_get_ip_info(STATION_IF, &ipinfo);
+    snprintf(ip, sizeof(ip), IPSTR, IP2STR(&ipinfo.ip));
+    return (char*) ip;
+}
 
 
 // *******************************************************************************************

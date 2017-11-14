@@ -6,6 +6,8 @@
 
 int get_scene(const char* msg);
 
+// *******************************************************************************************
+// 
 int get_scene(const char* msg)
 {
 	int output = 1;
